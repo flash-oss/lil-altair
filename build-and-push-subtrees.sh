@@ -3,7 +3,7 @@
 # Script to build each sub-app in the monorepo, create git subtrees, and push build results
 
 # Set the GitHub repository URL
-REPO_URL="git@github.com:SamYevmenenko30/lil-altair.git"
+REPO_URL="git@github.com:flash-oss/lil-altair.git"
 
 # Create a temporary directory for build outputs
 mkdir -p temp_builds
