@@ -92,7 +92,6 @@ build_and_push_subtree() {
   fi
 
   echo "Successfully processed $package_name"
-  echo "Package can be accessed via: \"$package_name\": \"github:SamYevmenenko30/lil-altair#$branch_name\""
   echo "-------------------------------------------"
 }
 
