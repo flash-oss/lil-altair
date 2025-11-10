@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["angular:styles/component:css;d7d72e293d90875e3f00ad2d7f72683daba83ef0645d59080555c17c61443c46;/Users/semenyevmenenko/work/flash-payments/altair/packages/altair-app/src/app/modules/altair/components/fork-repo/fork-repo.component.html"],
-  "sourcesContent": ["\n  .github-corner:hover .octo-arm {\n    animation: octocat-wave 560ms ease-in-out;\n  }\n  @keyframes octocat-wave {\n    0%,\n    100% {\n      transform: rotate(0);\n    }\n    20%,\n    60% {\n      transform: rotate(-25deg);\n    }\n    40%,\n    80% {\n      transform: rotate(10deg);\n    }\n  }\n  @media (max-width: 500px) {\n    .github-corner:hover .octo-arm {\n      animation: none;\n    }\n    .github-corner .octo-arm {\n      animation: octocat-wave 560ms ease-in-out;\n    }\n  }\n"],
-  "mappings": "AACE,CAAC,aAAa,OAAO,CAAC,SACpB,UAAW,aAAa,KAAM,WAChC,CACA,WAFa,aAGX,MAEE,UAAW,OAAO,EACpB,CACA,QAEE,UAAW,OAAO,OACpB,CACA,QAEE,UAAW,OAAO,MACpB,CACF,CACA,OAAO,CAAC,SAAS,EAAE,OACjB,CAlBD,aAkBe,OAAO,CAlBD,SAmBlB,UAAW,IACb,CACA,CArBD,cAqBgB,CArBK,SAsBlB,UAAW,aAAa,KAAM,WAChC,CACF",
-  "names": []
-}
