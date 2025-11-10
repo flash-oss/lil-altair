@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/modules/altair/components/doc-viewer/doc-viewer-directive/doc-viewer-directive.component.scss"],
+  "sourcesContent": [".doc-viewer-item-directive-name {\n  font-weight: 600;\n  color: var(--primary-color);\n}\n\n.doc-viewer-item-locations {\n  font-style: italic;\n  color: var(--text-secondary-color);\n}\n\n.doc-viewer-item-repeatable-text {\n  font-style: italic;\n  color: var(--text-secondary-color);\n}\n"],
+  "mappings": "AAAA,CAAA,+BACE,YAAA,IACA,MAAA,IAAA,iBAGF,CAAA,0BAKA,CAAA,gCAJE,WAAA,OACA,MAAA,IAAA",
+  "names": []
+}
