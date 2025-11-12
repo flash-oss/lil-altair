@@ -192,6 +192,12 @@ export interface SettingsState {
    * Whether target GraphQL server supports deprecation of input values
    */
   'introspection.options.inputValueDeprecation'?: boolean;
+
+  /**
+   * Specifies the application environment
+   * @default 'production'
+   */
+  environment?: string;
 }
 
 // Partial settings state for generating partial validator

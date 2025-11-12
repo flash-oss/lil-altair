@@ -99,6 +99,7 @@ const providers = [
   services.FilesService,
   services.RequestHandlerRegistryService,
   services.WebExtensionsService,
+  services.LogoService,
   // Setting the reducer provider in main.ts now (for proper config initialization)
   // reducerProvider,
   CookieService,

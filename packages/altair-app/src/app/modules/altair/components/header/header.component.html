@@ -4,7 +4,7 @@
     'header__logo-wrapper--experimental': settings()?.enableExperimental,
   }"
 >
-  <img src="assets/img/altair_logo.svg" alt="logo" class="header__logo" />
+  <img [src]="logoPath$ | async" alt="logo" class="header__logo" />
 </div>
 
 <app-window-switcher

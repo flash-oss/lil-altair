@@ -46,6 +46,7 @@ import {
   BannerService,
   DbService,
   WebExtensionsService,
+  LogoService,
 } from '../../services';
 
 import isElectron from 'altair-graphql-core/build/utils/is_electron';
@@ -107,6 +108,7 @@ export class AltairComponent {
   private dbService = inject(DbService);
   private webExtensionsService = inject(WebExtensionsService);
   private altairConfig = inject(AltairConfig);
+  private logoService = inject(LogoService);
 
   windowIds$: Observable<any[]>;
   settings$: Observable<SettingsState>;
@@ -145,6 +147,7 @@ export class AltairComponent {
 
   sidebarPanels$: Observable<AltairPanel[]>;
   headerPanels$: Observable<AltairPanel[]>;
+  logoPath$: Observable<string | undefined>;
 
   constructor() {
     const windowService = this.windowService;
@@ -153,16 +156,12 @@ export class AltairComponent {
     this.isWebApp = altairConfig.isWebApp;
     this.authEnabled = !altairConfig.initialData.disableAccount;
     this.cspNonce = altairConfig.cspNonce;
+    this.logoPath$ = this.logoService.getLogoPath();
     this.settings$ = this.store
       .pipe(select('settings'))
       .pipe(distinctUntilChanged());
     this.theme$ = this.settings$.pipe(
       map((settings) => {
-        // Get specified theme
-        // Add deprecated theme options
-        // Warn about deprecated theme options, with alternatives
-        // Add theme config object from settings
-
         const selectedTheme = this.themeRegistry.getTheme(settings.theme) || {
           isSystem: true,
         };

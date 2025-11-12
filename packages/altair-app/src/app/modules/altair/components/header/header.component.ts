@@ -1,9 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   input,
   output
 } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AltairPanel } from 'altair-graphql-core/build/plugin/panel';
 import {
   EnvironmentsState,
@@ -14,6 +16,7 @@ import { SettingsState } from 'altair-graphql-core/build/types/state/settings.in
 import { WindowState } from 'altair-graphql-core/build/types/state/window.interfaces';
 import { externalLink } from '../../utils';
 import { IQueryCollection } from 'altair-graphql-core/build/types/state/collection.interfaces';
+import { LogoService } from '../../services';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +26,13 @@ import { IQueryCollection } from 'altair-graphql-core/build/types/state/collecti
   standalone: false,
 })
 export class HeaderComponent {
+  private logoService = inject(LogoService);
+  logoPath$: Observable<string | undefined>;
+
+  constructor() {
+    this.logoPath$ = this.logoService.getLogoPath();
+  }
+
   readonly windows = input<WindowState>({});
   readonly windowIds = input<string[]>([]);
   readonly closedWindows = input<PerWindowState[]>([]);

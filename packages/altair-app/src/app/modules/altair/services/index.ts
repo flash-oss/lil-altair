@@ -21,3 +21,4 @@ export { FilesService } from './files/files.service';
 export { RequestHandlerRegistryService } from './request/request-handler-registry.service';
 export { BannerService } from './banner/banner.service';
 export { WebExtensionsService } from './webextensions/webextensions.service';
+export { LogoService } from './logo';
