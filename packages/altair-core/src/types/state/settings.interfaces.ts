@@ -82,6 +82,11 @@ export interface SettingsState {
   'request.withCredentials'?: boolean;
 
   /**
+   * Specify credentials mode for requests
+   */
+  'request.credentials'?: string;
+
+  /**
    * Reload schema on app start
    */
   'schema.reloadOnStart'?: boolean;
@@ -90,6 +95,11 @@ export interface SettingsState {
    * Reload schema when switching environments
    */
   'schema.reload.onEnvChange'?: boolean;
+
+  /**
+   * Enable schema polling
+   */
+  'schema.polling.enable'?: boolean;
 
   /**
    * Disable update notification
