@@ -16,7 +16,7 @@ import { SettingsState } from 'altair-graphql-core/build/types/state/settings.in
 import { WindowState } from 'altair-graphql-core/build/types/state/window.interfaces';
 import { externalLink } from '../../utils';
 import { IQueryCollection } from 'altair-graphql-core/build/types/state/collection.interfaces';
-import { LogoService } from '../../services';
+import { IconService } from '../../services';
 
 @Component({
   selector: 'app-header',
@@ -26,11 +26,11 @@ import { LogoService } from '../../services';
   standalone: false,
 })
 export class HeaderComponent {
-  private logoService = inject(LogoService);
+  private iconService = inject(IconService);
   logoPath$: Observable<string | undefined>;
 
   constructor() {
-    this.logoPath$ = this.logoService.getLogoPath();
+    this.logoPath$ = this.iconService.getLogoPath();
   }
 
   readonly windows = input<WindowState>({});

@@ -46,7 +46,7 @@ import {
   BannerService,
   DbService,
   WebExtensionsService,
-  LogoService,
+  IconService,
 } from '../../services';
 
 import isElectron from 'altair-graphql-core/build/utils/is_electron';
@@ -108,7 +108,7 @@ export class AltairComponent {
   private dbService = inject(DbService);
   private webExtensionsService = inject(WebExtensionsService);
   private altairConfig = inject(AltairConfig);
-  private logoService = inject(LogoService);
+  private iconService = inject(IconService);
 
   windowIds$: Observable<any[]>;
   settings$: Observable<SettingsState>;
@@ -156,7 +156,7 @@ export class AltairComponent {
     this.isWebApp = altairConfig.isWebApp;
     this.authEnabled = !altairConfig.initialData.disableAccount;
     this.cspNonce = altairConfig.cspNonce;
-    this.logoPath$ = this.logoService.getLogoPath();
+    this.logoPath$ = this.iconService.getLogoPath();
     this.settings$ = this.store
       .pipe(select('settings'))
       .pipe(distinctUntilChanged());
