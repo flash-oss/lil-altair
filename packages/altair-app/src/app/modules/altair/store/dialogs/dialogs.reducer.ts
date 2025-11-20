@@ -5,7 +5,7 @@ import { AllActions } from '../action';
 export const getInitialState = (): DialogState => {
   return {
     showHeaderDialog: false,
-    showVariableDialog: false,
+    showVariableDialog: true,
     showRequestHandlerDialog: false,
     showHistoryDialog: false,
     showPreRequestDialog: false,
