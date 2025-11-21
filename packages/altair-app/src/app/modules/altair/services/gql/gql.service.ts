@@ -647,18 +647,16 @@ export class GqlService {
 
         // valiate variables
         if (variables) {
-          try {
-            JSON.parse(variables);
-          } catch (err) {
+          const parsedVariables = parseJson(variables, null);
+          if (parsedVariables === null) {
             throw new Error('Variables is not valid JSON');
           }
         }
 
         // validate extensions
         if (extensions) {
-          try {
-            JSON.parse(extensions);
-          } catch (err) {
+          const parsedExtensions = parseJson(extensions, null);
+          if (parsedExtensions === null) {
             throw new Error('Request extensions is not valid JSON');
           }
         }
