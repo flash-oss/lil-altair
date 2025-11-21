@@ -156,6 +156,11 @@ export const jsonc = (str: string) => {
 
 export const parseJson = (str: string, defaultValue: unknown = {}) => {
   try {
+      str = str.trim();
+      str = str.replace(commentRegex(), '');
+      if (!str) {
+        return defaultValue;
+      }
     return JSONBigint.parse(str);
   } catch {
     debug.error('Could not parse JSON. Using default instead.');
