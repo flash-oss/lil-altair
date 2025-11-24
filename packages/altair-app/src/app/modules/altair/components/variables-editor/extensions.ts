@@ -1,11 +1,11 @@
-import { jsonSchema } from 'codemirror-json-schema';
+import { json5Schema } from "codemirror-json-schema/json5";
 
 export const gqlVariables = () => {
   return [
     // start with an empty schema
-    jsonSchema({
+    json5Schema({
       type: 'object',
       properties: {},
-    }),
+    })
   ];
 };
