@@ -1,1 +1,0 @@
-{"version":3,"file":"send-message.dto.d.ts","sourceRoot":"","sources":["../../../src/ai/dto/send-message.dto.ts"],"names":[],"mappings":"AAMA,OAAO,EAAE,eAAe,EAAE,MAAM,0BAA0B,CAAC;AAI3D,qBAAa,cAAe,YAAW,eAAe;IAKpD,OAAO,EAAG,MAAM,CAAC;IAMjB,GAAG,CAAC,EAAE,MAAM,CAAC;IAMb,YAAY,CAAC,EAAE,MAAM,CAAC;IAMtB,gBAAgB,CAAC,EAAE,MAAM,CAAC;IAM1B,eAAe,CAAC,EAAE,MAAM,CAAC;CAC1B"}

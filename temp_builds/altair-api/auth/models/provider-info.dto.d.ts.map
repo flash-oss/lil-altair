@@ -1,1 +1,0 @@
-{"version":3,"file":"provider-info.dto.d.ts","sourceRoot":"","sources":["../../../src/auth/models/provider-info.dto.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,gBAAgB,EAAE,MAAM,mBAAmB,CAAC;AAErD,MAAM,WAAW,YAAY;IAC3B,QAAQ,EAAE,gBAAgB,CAAC;IAC3B,cAAc,EAAE,MAAM,CAAC;CACxB"}
