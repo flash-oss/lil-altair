@@ -1,0 +1,27 @@
+import { IRemoteQuery } from 'altair-graphql-core/build/types/state/collection.interfaces';
+import { CreateDTO } from 'altair-graphql-core/build/types/shared';
+import { HeaderState } from 'altair-graphql-core/build/types/state/header.interfaces';
+export type IQueryContentDto = Omit<CreateDTO<IRemoteQuery>, 'gqlSchema' | 'collectionId'> & {
+    authorizationData?: any;
+};
+export interface ICreateQueryCollectionDto {
+    name: string;
+    queries?: Omit<ICreateQueryDto, 'collectionId'>[];
+    workspaceId?: string;
+    teamId?: string;
+    description?: string;
+    preRequestScript?: string;
+    preRequestScriptEnabled?: boolean;
+    postRequestScript?: string;
+    postRequestScriptEnabled?: boolean;
+    headers?: HeaderState;
+    environmentVariables?: Record<string, unknown>;
+}
+export type IUpdateQueryCollectionDto = Partial<ICreateQueryCollectionDto>;
+export interface ICreateQueryDto {
+    name: string;
+    collectionId: string;
+    content: IQueryContentDto;
+}
+export type IUpdateQueryDto = Partial<ICreateQueryDto>;
+//# sourceMappingURL=query.d.ts.map

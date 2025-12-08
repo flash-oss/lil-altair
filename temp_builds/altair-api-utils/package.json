@@ -1,0 +1,25 @@
+{
+  "name": "@altairgraphql/api-utils",
+  "version": "8.4.1",
+  "dependencies": {
+    "@altairgraphql/db": "8.4.1",
+    "altair-graphql-core": "8.4.1",
+    "ky": "^0.33.2",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "typescript": "^5.8.0"
+  },
+  "license": "MIT",
+  "main": "build/index.js",
+  "private": true,
+  "scripts": {
+    "build": "node ./scripts/build.cjs",
+    "bootstrap": "pnpm build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/altair-graphql/altair.git"
+  }
+}
