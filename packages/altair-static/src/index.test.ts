@@ -160,4 +160,15 @@ describe('renderAltair', () => {
       })
     ).toMatchSnapshot();
   });
+  it('should render custom favicon URL when provided', () => {
+    (getAltairHtml as any).default = jest.fn();
+    (getAltairHtml as any).default.mockReturnValue(
+      readFileSync(resolve(__dirname, 'index.html'), 'utf8')
+    );
+    const result = renderAltair({
+      faviconURL: 'assets/img/payments_uat.png',
+    });
+
+    expect(result).toContain('<link rel="icon" href="assets/img/payments_uat.png" />');
+  });
 });

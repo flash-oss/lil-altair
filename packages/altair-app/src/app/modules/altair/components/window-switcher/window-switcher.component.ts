@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, HostBinding, input, inject, output } from '@angular/core';
+import { Component, HostBinding, input, inject, output, ElementRef } from '@angular/core';
 import { AltairConfig } from 'altair-graphql-core/build/config';
 import { PerWindowState } from 'altair-graphql-core/build/types/state/per-window.interfaces';
 import { WindowState } from 'altair-graphql-core/build/types/state/window.interfaces';
@@ -20,6 +20,7 @@ import { IQueryCollection } from 'altair-graphql-core/build/types/state/collecti
 export class WindowSwitcherComponent {
   private altairConfig = inject(AltairConfig);
   private nzContextMenuService = inject(NzContextMenuService);
+  private elementRef = inject(ElementRef);
 
   readonly windows = input<WindowState>({});
   readonly windowIds = input<string[]>([]);
@@ -109,5 +110,44 @@ export class WindowSwitcherComponent {
 
   log(str: string) {
     debug.log(str);
+  }
+
+  /**
+   * Handle wheel events to enable horizontal scrolling with the mousewheel
+   * @param event The wheel event
+   */
+  onWheel(event: WheelEvent): void {
+    const container = this.elementRef.nativeElement.querySelector(
+      '.window-switcher__list'
+    ) as HTMLElement | null;
+    if (!container) {
+      return;
+    }
+
+    const maxScrollLeft = Math.max(0, container.scrollWidth - container.clientWidth);
+    const hasHorizontalOverflow = maxScrollLeft > 0;
+
+    // Keep normal page wheel behavior when the tab strip does not overflow.
+    if (!hasHorizontalOverflow) {
+      return;
+    }
+
+    // Hard-lock wheel behavior to horizontal scroll while the pointer is over tab strip.
+    event.preventDefault();
+
+    let wheelUnitMultiplier = 1;
+    if (event.deltaMode === WheelEvent.DOM_DELTA_LINE) {
+      wheelUnitMultiplier = 16;
+    } else if (event.deltaMode === WheelEvent.DOM_DELTA_PAGE) {
+      wheelUnitMultiplier = container.clientWidth;
+    }
+    const rawHorizontalDelta =
+      Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+    const horizontalDelta = rawHorizontalDelta * wheelUnitMultiplier;
+    const nextScrollLeft = Math.max(
+      0,
+      Math.min(maxScrollLeft, container.scrollLeft + horizontalDelta)
+    );
+    container.scrollLeft = nextScrollLeft;
   }
 }

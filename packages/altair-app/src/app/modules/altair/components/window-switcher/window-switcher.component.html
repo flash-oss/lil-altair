@@ -5,6 +5,7 @@
   [ngClass]="{ 'window-switcher__no-scrollbar': !enableScrollbar() }"
   [cdkDropListData]="windowIds()"
   (cdkDropListDropped)="onDropEnd($event)"
+  (wheel)="onWheel($event)"
 >
   @for (windowId of windowIds(); track windowId) {
     <app-window-switcher-item

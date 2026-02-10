@@ -13,6 +13,12 @@ export interface RenderOptions extends AltairConfigOptions {
    * @default false
    */
   serveInitialOptionsInSeperateRequest?: boolean | string;
+
+  /**
+   * URL of the favicon to use in the rendered Altair HTML page.
+   * If not provided, the default `favicon.ico` from the dist directory is used.
+   */
+  faviconURL?: string;
 }
 
 /**
@@ -89,9 +95,8 @@ export const renderInitSnippet = (options: RenderOptions = {}) => {
  * @param renderOptions
  */
 export const renderAltair = (options: RenderOptions = {}) => {
-  const altairHtml = getAltairHtml();
+  const altairHtml = getRenderedAltairHtml(options);
   const initialOptions = renderInitSnippet(options);
-  const baseURL = options.baseURL || './';
   if (options.serveInitialOptionsInSeperateRequest) {
     if (!options.cspNonce) {
       // When using cspNonce, the initial options must be inlined to avoid CSP issues
@@ -103,24 +108,40 @@ export const renderAltair = (options: RenderOptions = {}) => {
           ? options.serveInitialOptionsInSeperateRequest
           : 'initial_options.js';
       return altairHtml
-        .replace(/<base.*>/, `<base href="${baseURL}">`)
-        .replace('<style>', `<style nonce="${options.cspNonce ?? ''}">`)
         .replace(
           '</body>',
           () =>
-            `<script type="module" nonce="${options.cspNonce ?? ''}" src="${scriptName.replace(/["'<>=]/g, '')}"></script></body>`
+            `<script type="module" nonce="${options.cspNonce ?? ''}" src="${sanitizeAttributeValue(scriptName)}"></script></body>`
         );
     }
   }
 
   return altairHtml
-    .replace(/<base.*>/, `<base href="${baseURL}">`)
-    .replace('<style>', `<style nonce="${options.cspNonce ?? ''}">`)
     .replace(
       '</body>',
       () =>
         `<script type="module" nonce="${options.cspNonce ?? ''}">${initialOptions}</script></body>`
     );
+};
+
+const getRenderedAltairHtml = (options: RenderOptions) => {
+  const baseURL = options.baseURL || './';
+  let renderedHtml = getAltairHtml()
+    .replace(/<base.*>/, `<base href="${baseURL}">`)
+    .replace('<style>', `<style nonce="${options.cspNonce ?? ''}">`);
+
+  if (options.faviconURL) {
+    renderedHtml = renderedHtml.replace(
+      /<link\b[^>]*\brel=["']icon["'][^>]*>/i,
+      `<link rel="icon" href="${sanitizeAttributeValue(options.faviconURL)}" />`
+    );
+  }
+
+  return renderedHtml;
+};
+
+const sanitizeAttributeValue = (value: string) => {
+  return value.replace(/["'<>]/g, '');
 };
 
 const getRenderedAltairOpts = (renderOptions: RenderOptions) => {
