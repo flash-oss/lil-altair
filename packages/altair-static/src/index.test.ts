@@ -171,4 +171,31 @@ describe('renderAltair', () => {
 
     expect(result).toContain('<link rel="icon" href="assets/img/payments_uat.png" />');
   });
+  it('should render UAT favicon when environment is uat', () => {
+    (getAltairHtml as any).default = jest.fn();
+    (getAltairHtml as any).default.mockReturnValue(
+      readFileSync(resolve(__dirname, 'index.html'), 'utf8')
+    );
+    const result = renderAltair({
+      initialSettings: {
+        environment: 'uat',
+      },
+    });
+
+    expect(result).toContain('<link rel="icon" href="assets/favicon_uat.ico" />');
+  });
+  it('should prefer custom favicon URL over environment-based favicon', () => {
+    (getAltairHtml as any).default = jest.fn();
+    (getAltairHtml as any).default.mockReturnValue(
+      readFileSync(resolve(__dirname, 'index.html'), 'utf8')
+    );
+    const result = renderAltair({
+      faviconURL: 'assets/img/payments_uat.png',
+      initialSettings: {
+        environment: 'uat',
+      },
+    });
+
+    expect(result).toContain('<link rel="icon" href="assets/img/payments_uat.png" />');
+  });
 });

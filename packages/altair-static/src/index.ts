@@ -21,6 +21,9 @@ export interface RenderOptions extends AltairConfigOptions {
   faviconURL?: string;
 }
 
+const DEFAULT_FAVICON_URL = 'favicon.ico';
+const UAT_FAVICON_URL = 'assets/favicon_uat.ico';
+
 /**
  * this type assertion is used to ensure that all properties of AltairConfigOptions are included in the RenderOptions.
  * When new properties are added to AltairConfigOptions, this type assertion will throw an error and force the developer to update it accordingly.
@@ -130,14 +133,28 @@ const getRenderedAltairHtml = (options: RenderOptions) => {
     .replace(/<base.*>/, `<base href="${baseURL}">`)
     .replace('<style>', `<style nonce="${options.cspNonce ?? ''}">`);
 
-  if (options.faviconURL) {
+  const faviconURL = getFaviconURL(options);
+  if (options.faviconURL || faviconURL !== DEFAULT_FAVICON_URL) {
     renderedHtml = renderedHtml.replace(
       /<link\b[^>]*\brel=["']icon["'][^>]*>/i,
-      `<link rel="icon" href="${sanitizeAttributeValue(options.faviconURL)}" />`
+      `<link rel="icon" href="${sanitizeAttributeValue(faviconURL)}" />`
     );
   }
 
   return renderedHtml;
+};
+
+const getFaviconURL = (options: RenderOptions) => {
+  if (options.faviconURL) {
+    return options.faviconURL;
+  }
+
+  const environment = options.initialSettings?.environment
+    ?.toString()
+    .trim()
+    .toLowerCase();
+
+  return environment === 'uat' ? UAT_FAVICON_URL : DEFAULT_FAVICON_URL;
 };
 
 const sanitizeAttributeValue = (value: string) => {
