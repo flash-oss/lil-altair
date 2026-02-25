@@ -1,8 +1,11 @@
 <div
   cdkDropList
-  cdkDropListOrientation="horizontal"
+  [cdkDropListOrientation]="listOrientation"
   class="window-switcher__list"
-  [ngClass]="{ 'window-switcher__no-scrollbar': !enableScrollbar() }"
+  [ngClass]="{
+    'window-switcher__no-scrollbar': !enableScrollbar(),
+    'window-switcher__list--multi-row': !isElectron(),
+  }"
   [cdkDropListData]="windowIds()"
   (cdkDropListDropped)="onDropEnd($event)"
   (wheel)="onWheel($event)"
@@ -92,9 +95,11 @@
       </ul>
     </nz-dropdown-menu>
   }
-  @if (windowIds().length < maxWindowCount) {
-    <div class="window-switcher__item" (click)="newWindowChange.emit()">
-      {{ 'ADD_NEW_WINDOW_TEXT' | translate }}
-    </div>
-  }
+  <div
+    class="window-switcher__item"
+    [ngClass]="{ 'window-switcher__item--disabled': windowIds().length >= maxWindowCount }"
+    (click)="windowIds().length < maxWindowCount && newWindowChange.emit()"
+  >
+    {{ 'ADD_NEW_WINDOW_TEXT' | translate }}
+  </div>
 </div>

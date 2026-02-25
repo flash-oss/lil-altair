@@ -6,8 +6,8 @@ exports[`WindowSwitcherComponent should render correctly 1`] = `
 >
   <div
     cdkdroplist=""
-    cdkdroplistorientation="horizontal"
-    class="window-switcher__list window-switcher__no-scrollbar"
+    cdkdroplistorientation="mixed"
+    class="window-switcher__list window-switcher__no-scrollbar window-switcher__list--multi-row"
   >
     
     <div

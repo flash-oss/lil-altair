@@ -1,6 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, HostBinding, input, inject, output, ElementRef } from '@angular/core';
-import { AltairConfig } from 'altair-graphql-core/build/config';
 import { PerWindowState } from 'altair-graphql-core/build/types/state/per-window.interfaces';
 import { WindowState } from 'altair-graphql-core/build/types/state/window.interfaces';
 import {
@@ -18,7 +17,6 @@ import { IQueryCollection } from 'altair-graphql-core/build/types/state/collecti
   standalone: false,
 })
 export class WindowSwitcherComponent {
-  private altairConfig = inject(AltairConfig);
   private nzContextMenuService = inject(NzContextMenuService);
   private elementRef = inject(ElementRef);
 
@@ -45,7 +43,10 @@ export class WindowSwitcherComponent {
   }
 
   windowIdEditing = '';
-  maxWindowCount = this.altairConfig.max_windows;
+  maxWindowCount = 50;
+  get listOrientation(): 'horizontal' | 'mixed' {
+    return this.isElectron() ? 'horizontal' : 'mixed';
+  }
 
   onDropEnd(event: CdkDragDrop<any, any, any>) {
     this.moveWindow(event.previousIndex || 0, event.currentIndex || 0);
@@ -117,6 +118,11 @@ export class WindowSwitcherComponent {
    * @param event The wheel event
    */
   onWheel(event: WheelEvent): void {
+    // Web uses a wrapped multi-row layout, so horizontal wheel behavior is electron-only.
+    if (!this.isElectron()) {
+      return;
+    }
+
     const container = this.elementRef.nativeElement.querySelector(
       '.window-switcher__list'
     ) as HTMLElement | null;

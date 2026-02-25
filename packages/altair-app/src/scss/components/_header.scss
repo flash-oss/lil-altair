@@ -1,6 +1,9 @@
 app-header {
   --header-height: 57px;
   display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
   // background: var(--header-bg-color);
   border-bottom: 1px solid rgba(var(--rgb-theme-border), 0.3);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);

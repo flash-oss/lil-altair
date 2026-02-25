@@ -29,6 +29,9 @@
   <div
     #wTitle
     class="window-switcher__input"
+    nz-tooltip
+    [nzTooltipTitle]="isEditing() ? null : (window()?.layout?.title || '')"
+    nzTooltipPlacement="bottom"
     [ngClass]="{
       'window-switcher__input--editing': isEditing(),
     }"

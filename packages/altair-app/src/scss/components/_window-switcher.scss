@@ -6,8 +6,9 @@ app-window-switcher {
   display: flex;
   align-items: center;
   flex: 1 1 auto;
+  min-width: 0;
   padding: 8px 0;
-  overflow: hidden;
+  overflow: visible;
 
   --shadow-height: 100%;
   // --shadow-color: rgba(0, 0, 0, 0.1);
@@ -65,6 +66,25 @@ app-window-switcher {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #f5f5f5;
   }
+
+  &.window-switcher__list--multi-row {
+    align-items: stretch;
+    flex-wrap: wrap;
+    height: auto;
+    overflow: visible;
+    -webkit-overflow-scrolling: auto;
+
+    > app-window-switcher-item,
+    > .window-switcher__item {
+      flex: 0 0 calc((100% - 14 * 8px) / 15);
+      max-width: calc((100% - 14 * 8px) / 15);
+      min-width: 0;
+    }
+
+    > app-window-switcher-item {
+      display: block;
+    }
+  }
 }
 app-window-switcher-item {
   transition: all 0.3s ease;
@@ -72,6 +92,8 @@ app-window-switcher-item {
 .window-switcher__item {
   display: flex;
   align-items: center;
+  min-width: 0;
+  overflow: hidden;
   padding: 8px;
   border-radius: 4px;
   gap: 4px;
@@ -90,6 +112,13 @@ app-window-switcher-item {
   }
 }
 
+.window-switcher__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .window-switcher__item--active {
   @extend .glassy-border;
   background: rgba(var(--rgb-theme-font), 0.05);
@@ -98,6 +127,11 @@ app-window-switcher-item {
   &:hover {
     opacity: 1;
   }
+}
+
+.window-switcher__item--disabled {
+  opacity: 0.25;
+  pointer-events: none;
 }
 
 .window-switcher__close {

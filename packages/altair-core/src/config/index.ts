@@ -31,7 +31,7 @@ export class AltairConfig {
   ga = 'UA-41432833-6';
   add_query_depth_limit = 3;
   tab_size = 2;
-  max_windows = isElectron ? 50 : 15;
+  max_windows = 50;
   default_language = isTranslateMode ? 'ach-UG' : 'en-US';
   languages = {
     'en-US': 'English',
