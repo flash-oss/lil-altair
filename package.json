@@ -1,95 +1,51 @@
 {
-  "name": "@altairgraphql/root",
-  "description": "The best graphQL client you will ever need",
+  "name": "altair-static",
+  "description": "Static package for altair graphql client",
   "version": "8.4.1",
-  "author": "Samuel Imolorhe <altair@sirmuel.design> (https://sirmuel.design/)",
+  "author": "Samuel Imolorhe <altair@sirmuel.design> (https://sirmuel.design)",
   "bugs": "https://github.com/altair-graphql/altair/issues",
-  "collective": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/altair",
-    "logo": "https://opencollective.com/altair/logo.txt"
-  },
   "devDependencies": {
-    "@changesets/cli": "^2.18.1",
-    "@playwright/test": "^1.31.2",
-    "@types/prettier": "^3.0.0",
-    "chalk": "^4.1.0",
-    "compare-versions": "^6.1.1",
-    "concurrently": "^9.2.1",
-    "cross-env": "^7.0.3",
-    "cwex": "^1.0.4",
-    "dotenv-cli": "^7.2.1",
-    "eslint": "8.18.0",
-    "eslint-config-prettier": "8.5.0",
-    "execa": "^5.0.0",
-    "https-browserify": "^1.0.0",
-    "inquirer": "^7.3.3",
-    "ng-packagr": "^13.0.8",
-    "opencollective": "^1.0.3",
-    "path-browserify": "^1.0.0",
-    "process": "^0.11.10",
-    "punycode": "^1.4.1",
-    "querystring-es3": "^0.2.1",
-    "start-server-and-test": "1.11.0",
-    "stream-browserify": "^3.0.0",
-    "stream-http": "^3.1.0",
-    "syncpack": "^9.8.4",
-    "turbo": "^2.0.6",
-    "typedoc": "^0.25.13",
-    "typedoc-plugin-markdown": "^4.0.3",
-    "typedoc-vitepress-theme": "^1.0.0",
-    "typescript": "catalog:",
-    "web-ext": "^6.5.0",
-    "wrangler": "^2.0.27"
+    "@altairgraphql/app": "8.4.1",
+    "@types/jest": "^24.0.23",
+    "@types/node": "^22.7.4",
+    "altair-graphql-core": "8.4.1",
+    "dts-bundle-generator": "^9.5.1",
+    "esbuild": "^0.14.43",
+    "jest": "29.4.1",
+    "ncp": "2.0.0",
+    "ts-jest": "29.0.5",
+    "typescript": "^5.8.0"
   },
   "engines": {
-    "node": ">= 22"
+    "node": ">= 6.9.1"
   },
   "funding": {
     "type": "opencollective",
     "url": "https://opencollective.com/altair"
   },
-  "homepage": "https://altair-graphql.github.io/altair/",
+  "gitHead": "e5ce60f5a14997f1471a961ac76efacbb044df46",
+  "homepage": "https://github.com/altair-graphql/altair#readme",
   "keywords": [
     "altair",
-    "client",
-    "editor",
     "graphql",
-    "wysiwyg"
+    "static"
   ],
   "license": "MIT",
-  "private": true,
-  "repository": "altair-graphql/altair.git",
-  "scripts": {
-    "build": "pnpm build-api",
-    "build-api": "pnpm --dir packages/altair-api build",
-    "build-app": "pnpm -F @altairgraphql/app build",
-    "build-electron": "pnpm build:ci && pnpm --dir packages/altair-electron build",
-    "build-ext": "pnpm bootstrap && pnpm --dir packages/altair-crx build",
-    "bootstrap": "turbo run bootstrap",
-    "build:ci": "pnpm bootstrap",
-    "ci:publish": "pnpm publish -r",
-    "local-verify": "pnpm build-app && pnpm build:ci",
-    "postinstall": "opencollective postinstall || syncpack fix-mismatches",
-    "publish-packages": "pnpm build:ci && pnpm ci:publish",
-    "start-test-server": "./bin/start_ci_test_server.sh",
-    "start:api:dev": "pnpm --dir packages/altair-api start:dev",
-    "start:api:prod": "pnpm --dir packages/altair-db prisma migrate deploy && pnpm --dir packages/altair-db prisma db seed && pnpm --dir packages/altair-api start:prod",
-    "start:app": "pnpm -F @altairgraphql/app start",
-    "start:redirect": "pnpm -F @altairgraphql/login-redirect dev",
-    "start:sandbox": "pnpm -F @altairgraphql/iframe-sandbox dev",
-    "start:docs": "pnpm -F @altairgraphql/docs dev",
-    "start:electron": "pnpm -F altair dev",
-    "start:tauri": "pnpm --F @altairgraphql/tauri dev",
-    "start:stripe:listen": "stripe listen --forward-to http://localhost:3000/stripe-webhook",
-    "test": "pnpm -r test",
-    "test:ci": "start-server-and-test start-test-server http://localhost:5400/test test:ci-test-only",
-    "test:ci-test-only": "turbo run test --filter=[HEAD^1] --parallel",
-    "test:ci:retries": "pnpm test:ci || pnpm test:ci || pnpm test:ci",
-    "typedoc": "typedoc"
+  "main": "./build/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/altair-graphql/altair.git"
   },
-  "packageManager": "pnpm@9.15.0",
-  "dependencies": {
-    "rxjs": "7.8.1"
+  "scripts": {
+    "compile": "node scripts/build.js",
+    "bootstrap": "pnpm prepare-dist && pnpm compile && pnpm types",
+    "prepare-dist": "node scripts/prepare_dist.js",
+    "test": "jest",
+    "types": "dts-bundle-generator src/index.ts -o build/index.d.ts --external-inlines altair-graphql-core --external-inlines altair-static --verbose"
+  },
+  "types": "./build/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

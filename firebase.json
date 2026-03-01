@@ -1,6 +1,0 @@
-{
-  "hosting": {
-    "public": "packages/altair-app/dist/browser",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
-  }
-}

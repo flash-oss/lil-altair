@@ -1,7 +1,0 @@
-<div class="p-10">
-  <!-- Always show Bearer Token component -->
-  <app-authorization-bearer
-    [authData]="authorizationState()?.data"
-    (authDataChange)="authDataChange.emit($event)"
-  />
-</div>

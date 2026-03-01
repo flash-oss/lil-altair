@@ -1,3 +1,0 @@
-files:
-  - source: /packages/altair-app/src/assets/i18n/default.json
-    translation: /packages/altair-app/src/assets/i18n/%locale%.json

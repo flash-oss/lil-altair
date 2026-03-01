@@ -1,9 +1,0 @@
-<div class="variables-editor">
-  <app-codemirror
-    #editor
-    [fullHeight]="true"
-    [extensions]="editorExtensions"
-    [ngModel]="variables()"
-    (ngModelChange)="variablesChange.emit($event)"
-  />
-</div>

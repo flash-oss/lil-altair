@@ -1,6 +1,0 @@
-jshint:
-  enabled: false
-eslint:
-  enabled: true
-scss:
-  config_file: .github/.scss-lint.yml
